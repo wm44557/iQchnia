@@ -12,11 +12,7 @@ use app\utility\Router;
 use app\controllers\loginController;
 use app\controllers\adminController;
 use app\controllers\userController;
-use app\controllers\auditorController;
-use app\controllers\invoices\deviceController;
-use app\controllers\invoices\invoiceController;
-use app\controllers\invoices\licenceController;
-use app\controllers\invoices\statisticsController;
+
 
 $router = new Router();
 
