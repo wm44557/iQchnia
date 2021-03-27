@@ -46,7 +46,7 @@ class loginController
         Redirect::to("/");
     }
 
-  
+
     public function user($router)
     {
         Permissions::check("user");

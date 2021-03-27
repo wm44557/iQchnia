@@ -53,7 +53,7 @@ class User
     public function deleteUser($id)
     {
         $this->conn = new Database();
-     
+
         $this->conn->query("DELETE FROM users WHERE `users`. `id`=:id");
         $this->conn->bindValue("id", $id);
         $this->conn->execute();
