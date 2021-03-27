@@ -1,0 +1,15 @@
+{
+    "authors": [
+        {
+            "name": "Team_iQchnia",
+            "email": "teamIQchniowy@emial.com"
+        }
+       
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "app\\": "./"
+        }
+    }
+}
