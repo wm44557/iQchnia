@@ -15,6 +15,8 @@
                 if ($_SESSION["user_role"] == "user" || $_SESSION["user_role"] == "admin" || $_SESSION["user_role"] == "auditor") :
 
             ?>
+                <form action="<?php echo STARTING_URL ?>/logout" method="post"><input class="button primary" type="submit" value="Wyloguj"></form>
+
                 <p>Witaj zalogowany uzytkowniku</p>
             <?php else : ?>
                 <div class="content" style="grid-column: span 2; width: 100%;">

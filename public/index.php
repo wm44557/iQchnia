@@ -23,5 +23,6 @@ $router = new Router();
 $router->get('/', [loginController::class, 'login']);
 $router->post('/', [loginController::class, 'login']);
 $router->get('/user', [loginController::class, 'user']);
+$router->post('/logout', [loginController::class, 'logout']);
 
 $router->resolve();
