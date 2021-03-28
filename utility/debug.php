@@ -3,11 +3,11 @@
 declare(strict_types=1);
 
 
-ini_set('display_errors', '1');
+// ini_set('display_errors', '1');
 
 function dump($data)
 {
-    echo '<br/><div 
+  echo '<br/><div 
     style="
       display: inline-block;
       padding: 2px 10px;
@@ -17,8 +17,8 @@ function dump($data)
     "
   >
   <pre>';
-    print_r($data);
-    echo '</pre>
+  print_r($data);
+  echo '</pre>
   </div>
   <br/>';
 }
