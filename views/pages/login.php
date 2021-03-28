@@ -57,10 +57,12 @@
                     <?php if (isset($errors['auth'])) echo "<p class='error'>" . $errors['auth'] . "</p>" ?>
                     <br>
                 </form>
-                <form action="<?php echo STARTING_URL ?>/register" method="post">
+                <br>
+                <!-- <form action="<?php echo STARTING_URL ?>/register" method="post">
                     <label>Nie masz konta? Dołącz do nas:
                         <input class="button is-text" type="submit" value="Zarejstruj się">
-                </form></label>
+                </form></label> -->
+                <p>Nie masz konta? Zarejstruj się <a href="<?php echo STARTING_URL ?>/register">tutaj</a> </p>
                 <br>
                 <time datetime="2021-03-30">Pozdrawiamy team iQchnia &#9786; </time>
             </div>
