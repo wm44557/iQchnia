@@ -52,6 +52,11 @@ class loginController
         Permissions::check("user");
         $router->render('pages/user/panel', []);
     }
-
-   
+    public function register($router)
+    {
+        if (isset($_SESSION['user_role'])) {
+            Redirect::to("/" . $_SESSION['user_role']);
+        }
+        $router->render('pages/register', []);
+    }
 }

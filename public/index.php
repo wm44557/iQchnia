@@ -21,4 +21,6 @@ $router->post('/', [loginController::class, 'login']);
 $router->get('/user', [loginController::class, 'user']);
 $router->post('/logout', [loginController::class, 'logout']);
 
+$router->get('/register', [loginController::class, 'register']);
+$router->post('/register', [loginController::class, 'register']);
 $router->resolve();
