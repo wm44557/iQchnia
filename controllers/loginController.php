@@ -61,6 +61,7 @@ class loginController
                 if ($_POST) {
                     if (!empty($_POST['login']) && !empty($_POST['password'] && !empty($_POST['email']))) {
 
+                            
                         $dataRegister = $_POST;
                         $user = new User();
                         $user->registerUser($dataRegister);
