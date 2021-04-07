@@ -52,11 +52,32 @@ class loginController
         Permissions::check("user");
         $router->render('pages/user/panel', []);
     }
+
     public function register($router)
     {
-        if (isset($_SESSION['user_role'])) {
-            Redirect::to("/" . $_SESSION['user_role']);
+        $user = new User();
+        if (isset($_POST['login'])) {
+            if (!$user->getUserLogin($_POST['login'])) {
+                if ($_POST) {
+                    if (!empty($_POST['login']) && !empty($_POST['password'] && !empty($_POST['email']))) {
+
+                        $dataRegister = $_POST;
+                        $user = new User();
+                        $user->registerUser($dataRegister);
+                        Redirect::to("/");
+                    } else {
+                        dump($_POST);
+                        $registerInfo = "Wypełnij odpowiednio pola";
+                    }
+                }
+            } else {
+                $registerInfo = "Użytkownik o takim loginie już istnieje!";
+            }
         }
-        $router->render('pages/register', []);
+
+
+        $router->render('pages/register',  [
+            'registerInfo' => $registerInfo ?? null
+        ]);
     }
 }

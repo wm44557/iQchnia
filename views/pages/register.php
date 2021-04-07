@@ -41,8 +41,8 @@
                             </span>
                         </p>
                     </div>
-                    <input class="button is-dark" type="submit" name="Zarejestruj się" value="Zaloguj">
-                    <?php if (isset($errors['auth'])) echo "<p class='error'>" . $errors['auth'] . "</p>" ?>
+                    <input class="button is-dark" type="submit" name="Zarejestruj się" value="Zarejestruj się">
+                    <?php if (isset($params['registerInfo'])) echo "<p class='error'>" . $params['registerInfo'] . "</p>" ?>
                     <br>
                 </form>
                 <br>
