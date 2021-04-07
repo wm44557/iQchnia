@@ -1,1 +1,6 @@
-<p>Panel usera</p>
+<div class="container">
+    <div class="panelContentUser">
+        TUTAJ BĘDZIE PANEL UŻYTKOWNIKA, DASHBOARD
+
+    </div>
+</div>
