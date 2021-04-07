@@ -13,6 +13,7 @@
                             <p>
                                 <strong>Naleśniki</strong> <small>@user123</small> <small></small>
                                 <br>
+                                <strong>Tutaj będzie pętla lecąca po tablicy z bazy</strong>
                                 Pyszne najlepsze naleśniki naleśniki dobre naleśniki ulubine moje nalesniki z serem
                                 Pyszne najlepsze naleśniki naleśniki dobre naleśniki ulubine moje nalesniki z serem
                                 Pyszne najlepsze naleśniki naleśniki dobre naleśniki ulubine moje nalesniki z serem

@@ -37,13 +37,13 @@
                                 Przepisy
                             </a>
 
-                            <a class="navbar-item" href="<?php echo STARTING_URL ?>/user/przepisy">
+                            <a class="navbar-item" href="<?php echo STARTING_URL ?>/user/ulubione">
                                 Ulubione
                             </a>
-                            <a class="navbar-item" href="<?php echo STARTING_URL ?>/user/przepisy">
+                            <a class="navbar-item" href="<?php echo STARTING_URL ?>/user/mojeprzepisy">
                                 Moje przepisy
                             </a>
-                            <a class="navbar-item" href="<?php echo STARTING_URL ?>/user/przepisy">
+                            <a class="navbar-item" href="<?php echo STARTING_URL ?>/user/dodajprzepis">
                                 Dodaj przepis
                             </a>
                             <div class="navbar-item has-dropdown is-hoverable">

@@ -66,7 +66,6 @@ class loginController
                         $user->registerUser($dataRegister);
                         Redirect::to("/");
                     } else {
-                        dump($_POST);
                         $registerInfo = "Wypełnij odpowiednio pola";
                     }
                 }

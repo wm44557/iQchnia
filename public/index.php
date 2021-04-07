@@ -27,4 +27,14 @@ $router->post('/register', [loginController::class, 'register']);
 $router->get('/user/przepisy', [userController::class, 'przepisy']);
 $router->post('/user/przepisy', [userController::class, 'przepisy']);
 
+
+$router->get('/user/mojeprzepisy', [userController::class, 'mojeprzepisy']);
+$router->post('/user/mojeprzepisy', [userController::class, 'mojeprzepisy']);
+
+$router->get('/user/ulubione', [userController::class, 'ulubione']);
+$router->post('/user/ulubione', [userController::class, 'ulubione']);
+
+$router->get('/user/dodajprzepis', [userController::class, 'dodajprzepis']);
+$router->post('/user/dodajprzepis', [userController::class, 'dodajprzepis']);
+
 $router->resolve();

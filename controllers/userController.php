@@ -18,4 +18,22 @@ class userController
         $user = new User();
         $router->render("pages/user/przepisy", []);
     }
+    public function mojeprzepisy($router)
+    {
+        Permissions::check("user");
+        $user = new User();
+        $router->render("pages/user/mojeprzepisy", []);
+    }
+    public function ulubione($router)
+    {
+        Permissions::check("user");
+        $user = new User();
+        $router->render("pages/user/ulubione", []);
+    }
+    public function dodajprzepis($router)
+    {
+        Permissions::check("user");
+        $user = new User();
+        $router->render("pages/user/dodajprzepis", []);
+    }
 }
