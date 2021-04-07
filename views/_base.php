@@ -18,6 +18,7 @@
 
             ?>
                 <form action="<?php echo STARTING_URL ?>/logout" method="post"><input class="button primary" type="submit" value="Wyloguj"></form>
+                <form action="<?php echo STARTING_URL ?>/user/przepisy" method="post"><input class="button primary" type="submit" value="Przepisy"></form>
 
                 <p>Witaj zalogowany uzytkowniku</p>
             <?php else : ?>

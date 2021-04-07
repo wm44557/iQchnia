@@ -23,4 +23,8 @@ $router->post('/logout', [loginController::class, 'logout']);
 
 $router->get('/register', [loginController::class, 'register']);
 $router->post('/register', [loginController::class, 'register']);
+
+$router->get('/user/przepisy', [userController::class, 'przepisy']);
+$router->post('/user/przepisy', [userController::class, 'przepisy']);
+
 $router->resolve();

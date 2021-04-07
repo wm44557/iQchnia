@@ -12,9 +12,10 @@ use app\utility\Permissions;
 class userController
 {
 
-    public function jakasFunkcja($router)
+    public function przepisy($router)
     {
         Permissions::check("user");
-        $router->render("pages/components/funkcja", []);
+        $user = new User();
+        $router->render("pages/user/przepisy", []);
     }
 }
