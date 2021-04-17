@@ -1,0 +1,354 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.7
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:8889
+-- Generation Time: Apr 17, 2021 at 11:28 AM
+-- Server version: 5.7.32
+-- PHP Version: 7.4.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `iQchnia`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL,
+  `name` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`) VALUES
+(1, 'śniadanie'),
+(2, 'obiad'),
+(3, 'kolacja'),
+(4, 'deser'),
+(5, 'przekąska'),
+(6, 'do pracy');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `diets`
+--
+
+CREATE TABLE `diets` (
+  `id` int(11) NOT NULL,
+  `name` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `diets`
+--
+
+INSERT INTO `diets` (`id`, `name`) VALUES
+(1, 'wegetariańska'),
+(2, 'wegańska'),
+(3, 'ketogeniczna'),
+(4, 'bezglutenowa'),
+(5, 'bez laktozy');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `difficulties`
+--
+
+CREATE TABLE `difficulties` (
+  `id` int(11) NOT NULL,
+  `name` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `difficulties`
+--
+
+INSERT INTO `difficulties` (`id`, `name`) VALUES
+(1, 'łatwy'),
+(2, 'umiarkowany'),
+(3, 'trudny');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ingredients`
+--
+
+CREATE TABLE `ingredients` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `recipes`
+--
+
+CREATE TABLE `recipes` (
+  `id` int(11) NOT NULL,
+  `title` varchar(50) NOT NULL,
+  `description` text NOT NULL,
+  `photo` blob NOT NULL,
+  `preparation` text NOT NULL,
+  `creating_time` varchar(30) NOT NULL,
+  `portions_number` int(11) NOT NULL,
+  `creator` int(11) NOT NULL,
+  `difficulty` int(11) NOT NULL,
+  `calories` int(11) DEFAULT NULL,
+  `diet` int(11) DEFAULT NULL,
+  `category` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `recpie_ingredients`
+--
+
+CREATE TABLE `recpie_ingredients` (
+  `recipe_id` int(11) NOT NULL,
+  `ingredient_id` int(11) NOT NULL,
+  `amount` decimal(10,0) NOT NULL,
+  `unit` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `units`
+--
+
+CREATE TABLE `units` (
+  `id` int(11) NOT NULL,
+  `name` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `units`
+--
+
+INSERT INTO `units` (`id`, `name`) VALUES
+(1, 'szczypt'),
+(2, 'szklanek'),
+(3, 'mililitrów'),
+(4, 'litrów'),
+(5, 'gramów'),
+(6, 'kilogramów'),
+(7, 'sztuk');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `email` varchar(128) DEFAULT NULL,
+  `login` varchar(64) NOT NULL,
+  `password` varchar(256) NOT NULL,
+  `role` enum('admin','user') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `email`, `login`, `password`, `role`) VALUES
+(1, '', 'admin', 'admin123', 'admin'),
+(25, 'marcin', 'marcin', 'marcin123', 'user'),
+(26, 'm@o2.pl', 'marcin1', 'marcin', 'user'),
+(32, 'master@o2.pl', 'master', 'master', 'user'),
+(33, 'master@gmail.com', 'master123', 'master123', 'user'),
+(37, 'm22@o2.pl', 'marcin222', '124124', 'user'),
+(41, 'm@o2.pl', 'marcin1234', 'marcin555', 'user'),
+(42, 'm@o2.pl', 'master222', 'fasfa', 'user'),
+(43, 'marcin333@fmm.pl', 'marcin333', 'marcin333', 'user');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_created`
+--
+
+CREATE TABLE `user_created` (
+  `user_id` int(11) NOT NULL,
+  `recipe_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_favourites`
+--
+
+CREATE TABLE `user_favourites` (
+  `user_id` int(11) NOT NULL,
+  `recipe_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `diets`
+--
+ALTER TABLE `diets`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `difficulties`
+--
+ALTER TABLE `difficulties`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ingredients`
+--
+ALTER TABLE `ingredients`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `recipes`
+--
+ALTER TABLE `recipes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `creator` (`creator`) USING BTREE,
+  ADD KEY `difficulty` (`difficulty`,`diet`,`category`),
+  ADD KEY `diet` (`diet`),
+  ADD KEY `category` (`category`);
+
+--
+-- Indexes for table `recpie_ingredients`
+--
+ALTER TABLE `recpie_ingredients`
+  ADD PRIMARY KEY (`recipe_id`),
+  ADD KEY `unit` (`unit`),
+  ADD KEY `ingredient_id` (`ingredient_id`);
+
+--
+-- Indexes for table `units`
+--
+ALTER TABLE `units`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `login` (`login`);
+
+--
+-- Indexes for table `user_created`
+--
+ALTER TABLE `user_created`
+  ADD PRIMARY KEY (`user_id`),
+  ADD KEY `recipe_id` (`recipe_id`);
+
+--
+-- Indexes for table `user_favourites`
+--
+ALTER TABLE `user_favourites`
+  ADD PRIMARY KEY (`user_id`),
+  ADD KEY `recipe_id` (`recipe_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `diets`
+--
+ALTER TABLE `diets`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `difficulties`
+--
+ALTER TABLE `difficulties`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `ingredients`
+--
+ALTER TABLE `ingredients`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `recipes`
+--
+ALTER TABLE `recipes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `units`
+--
+ALTER TABLE `units`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `recipes`
+--
+ALTER TABLE `recipes`
+  ADD CONSTRAINT `recipes_ibfk_1` FOREIGN KEY (`creator`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `recipes_ibfk_2` FOREIGN KEY (`diet`) REFERENCES `diets` (`id`),
+  ADD CONSTRAINT `recipes_ibfk_3` FOREIGN KEY (`category`) REFERENCES `categories` (`id`),
+  ADD CONSTRAINT `recipes_ibfk_4` FOREIGN KEY (`difficulty`) REFERENCES `difficulties` (`id`);
+
+--
+-- Constraints for table `recpie_ingredients`
+--
+ALTER TABLE `recpie_ingredients`
+  ADD CONSTRAINT `recpie_ingredients_ibfk_1` FOREIGN KEY (`unit`) REFERENCES `units` (`id`),
+  ADD CONSTRAINT `recpie_ingredients_ibfk_2` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`id`),
+  ADD CONSTRAINT `recpie_ingredients_ibfk_3` FOREIGN KEY (`ingredient_id`) REFERENCES `ingredients` (`id`);
+
+--
+-- Constraints for table `user_created`
+--
+ALTER TABLE `user_created`
+  ADD CONSTRAINT `user_created_ibfk_1` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`id`),
+  ADD CONSTRAINT `user_created_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `user_favourites`
+--
+ALTER TABLE `user_favourites`
+  ADD CONSTRAINT `user_favourites_ibfk_1` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`id`),
+  ADD CONSTRAINT `user_favourites_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
