@@ -1,43 +1,87 @@
-<div class="container">
-    <div class="panelContentUser">
-        <div class="item">
-            <div class="box">
-                <article class="media">
-                    <div class="media-left">
-                        <figure class="image is-128x128">
-                            <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
-                        </figure>
-                    </div>
-                    <div class="media-content">
-                        <div class="content">
-                            <p>
-                                <strong>Naleśniki</strong> <small>@user123</small> <small></small>
-                                <br>
-                                <strong>Tutaj będzie pętla lecąca po tablicy z bazy</strong>
-                                Pyszne najlepsze naleśniki naleśniki dobre naleśniki ulubine moje nalesniki z serem
-                                Pyszne najlepsze naleśniki naleśniki dobre naleśniki ulubine moje nalesniki z serem
-                                Pyszne najlepsze naleśniki naleśniki dobre naleśniki ulubine moje nalesniki z serem
-                                <br>
-
-                            </p>
-                        </div>
-                        <nav class="level is-mobile">
-                            <div class="level-left">
-
-                                <a class="level-item" aria-label="like">
-                                    <span class="icon is-small">
-                                        <i class="fas fa-heart" aria-hidden="true"></i>
-                                    </span>
-                                </a>
-                                <form action="<?php echo STARTING_URL ?>/" method="post"><input class="button is-small" type="submit" value="Zobacz przepis"></form>
-
-                            </div>
-                        </nav>
-                    </div>
-                </article>
-            </div>
-        </div>
-
+<div class="container mb-4">
+  <div class="field has-addons is-danger">
+    <div class="control is-expanded">
+      <input class="input is-large" type="text" placeholder="Wyszukaj przepis po składnikach lub po nazwie..">
     </div>
-
+    <div class="control">
+      <a class="button is-large is-danger">
+        Szukaj
+      </a>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="columns">
+      <div class="column">
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              Naleśniki z dżemorem
+            </p>
+          </header>
+            <figure class="image is-4by3">
+              <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+            </figure>
+          <div class="card-content">
+            <div class="content">
+              <p>Przepyszne naleśniczki z nadzieniem. Polecanko Bardzo</p>
+              <p class="has-text-left">Składniki: </p>
+              <ul class="block-list is-small is-outlined is-success is-left has-text-left">
+                <li><span class="tag is-primary">Dżemor</span></li>
+                <li>Placki</li>
+              </ul>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="#" class="card-footer-item">Otwórz przepis</a>
+          </footer>
+        </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">
+            Naleśniki z dżemorem
+          </p>
+        </header>
+          <figure class="image is-4by3">
+            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+          </figure>
+        <div class="card-content">
+          <div class="content">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
+            <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
+            <br>
+            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+          </div>
+        </div>
+        <footer class="card-footer">
+          <a href="#" class="card-footer-item">Otwórz przepis</a>
+        </footer>
+      </div>
+  </div>
+  <div class="column">
+    <div class="card">
+      <header class="card-header">
+        <p class="card-header-title">
+          Naleśniki z dżemorem
+        </p>
+      </header>
+        <figure class="image is-4by3">
+          <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+        </figure>
+      <div class="card-content">
+        <div class="content">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
+          <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
+          <br>
+          <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+        </div>
+      </div>
+      <footer class="card-footer">
+        <a href="#" class="card-footer-item">Otwórz przepis</a>
+      </footer>
+    </div>
+</div>
+  </div>
 </div>
