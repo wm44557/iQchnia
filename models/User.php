@@ -43,4 +43,14 @@ class User
         $this->conn->bindValue("permission", 'user');
         $this->conn->execute();
     }
+    public function editUserData($newData)
+    {
+        $this->conn = new Database();
+        $this->conn->query("UPDATE `users` SET `email`=:email, `login`=:login, `password`=:password WHERE `id`=:id");
+        $this->conn->bindValue("email", $newData['new_email']);
+        $this->conn->bindValue("login", $newData['new_login']);
+        $this->conn->bindValue("password", $newData['new_password']);
+        $this->conn->bindValue("id", $_SESSION['user_id']);
+        $this->conn->execute();
+    }
 }
