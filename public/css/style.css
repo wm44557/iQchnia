@@ -22,7 +22,6 @@ html {
 .container {
     max-width: 1400px;
     text-align: center;
-
 }
 
 
@@ -98,4 +97,17 @@ html {
     left: 50%;
     top: -75%;
     transform: translateX(-50%);
+}
+
+.space {
+    padding: 4rem;
+}
+
+.left {
+    text-align: left;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
 }

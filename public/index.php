@@ -37,4 +37,7 @@ $router->post('/user/ulubione', [userController::class, 'ulubione']);
 $router->get('/user/dodajprzepis', [userController::class, 'dodajprzepis']);
 $router->post('/user/dodajprzepis', [userController::class, 'dodajprzepis']);
 
+$router->get('/user/edytujdane', [userController::class, 'edytujdane']);
+$router->post('/user/edytujdane', [userController::class, 'edytujdane']);
+
 $router->resolve();
