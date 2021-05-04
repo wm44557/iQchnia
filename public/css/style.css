@@ -36,6 +36,11 @@ html {
 }
 
 
+.formRecipe {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
 
 
 .navbar-item2 {
