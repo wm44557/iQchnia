@@ -38,7 +38,7 @@ class Recipe
     public function createRecipe($dataRegister)
     {
         $this->conn = new Database();
-        $this->conn->query("INSERT INTO `recipes`(`title`, `description`, `creator`,`difficulty`, `calories`, `diet`, `category`,`photo`) VALUES (:title,:description,:creator,:difficulty,:calories,:diet,:category,'123')");
+        $this->conn->query("INSERT INTO `recipes`(`title`, `description`, `creator`,`difficulty`, `calories`, `diet`, `category`,`photo`) VALUES (:title,:description,:creator,:difficulty,:calories,:diet,:category,:photo)");
         $this->conn->bindValue("title", $dataRegister['title']);
         $this->conn->bindValue("description", $dataRegister['description']);
         $this->conn->bindValue("creator", $dataRegister['creator']);
@@ -46,6 +46,8 @@ class Recipe
         $this->conn->bindValue("calories", $dataRegister['calories']);
         $this->conn->bindValue("diet", $dataRegister['diet']);
         $this->conn->bindValue("category", $dataRegister['category']);
+        $this->conn->bindValue("photo", $dataRegister['photo']);
+
         $this->conn->execute();
     }
 }
