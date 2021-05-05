@@ -49,11 +49,12 @@ class userController
             ) {
             }
             $newData = $_POST;
-
             $recipe->createRecipe($newData);
-        }
-        dump($_POST);
+            $router->render('pages/user/dodajskladniki', [
+                'dane' => 'UDALO SIE PRZESLAC',
 
+            ]);
+        }
 
         $router->render("pages/user/dodajprzepis", [
             'dane' => $recipe->getAllIngredients(),
@@ -62,6 +63,13 @@ class userController
             'diets' => $recipe->getAllDiets()
 
         ]);
+    }
+
+    public function dodajskladniki($router)
+    {
+        Permissions::check("user");
+        $user = new User();
+        $router->render("pages/user/dodajskladniki", []);
     }
     public function edytujdane($router)
     {

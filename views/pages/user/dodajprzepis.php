@@ -21,7 +21,7 @@
             <div class="field">
                 <label class="label">Wybierz kategorię</label>
                 <div class="field">
-                    <div class="select">
+                    <div class="select  is-fullwidth">
                         <select name="category">
                             <?php foreach ($params['category'] as $category) {
                                 echo "    <option value=\"" . $category->id . "\"> " . $category->name . "</option>";
@@ -35,7 +35,7 @@
             <div class="field">
                 <label class="label">Wybierz poziom trudności</label>
                 <div class="field">
-                    <div class="select">
+                    <div class="select  is-fullwidth">
                         <select name="difficulty">
                             <?php foreach ($params['difficulties'] as $difficulties) {
                                 echo "    <option value=\"" . $difficulties->id . "\"> " . $difficulties->name . "</option>";
@@ -58,7 +58,7 @@
             <div class="field">
                 <label class="label">Wybierz typ kuchni</label>
                 <div class="field">
-                    <div class="select">
+                    <div class="select  is-fullwidth">
                         <select name="diet">
                             <?php foreach ($params['diets'] as $diets) {
                                 echo "    <option value=\"" . $diets->id . "\"> " . $diets->name . "</option>";
