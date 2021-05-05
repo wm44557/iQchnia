@@ -26,6 +26,7 @@ class loginController
                 $_SESSION['user_id'] = $result->id;
                 $_SESSION['user_login'] = $result->login;
                 $_SESSION['user_role'] = $result->role;
+                $_SESSION['user_email'] = $result->email;
             } else {
                 $errors['auth'] = "Niepoprawny login lub hasło.";
             }

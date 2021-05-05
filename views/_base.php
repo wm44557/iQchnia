@@ -62,7 +62,7 @@
                                         Kontakt
                                     </a>
                                     <hr class="navbar-divider">
-                                    <a class="navbar-item" href="<?php echo STARTING_URL ?>/user/przepisy">
+                                    <a class="navbar-item" href="<?php echo STARTING_URL ?>/user/edytujdane">
                                         Edytuj dane
                                     </a>
                                 </div>
