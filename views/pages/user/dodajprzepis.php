@@ -71,7 +71,7 @@
 
             <div class="file ">
                 <label class="file-label ">
-                    <input class="file-input " type="file" name="photo">
+                    <input class="file-input " type="file" name="photo" value=''>
                     <span class="file-cta">
                         <span class="file-icon">
                             <i class="fas fa-upload"></i>

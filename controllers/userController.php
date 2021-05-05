@@ -83,6 +83,7 @@ class userController
                 're_in_data' => $recipe->getRecipeIngredients($_POST['recipe_id'])
             ]);
         } else {
+            Redirect::to("/" . $_SESSION['user_role'] . "/dodajprzepis");
         }
     }
     public function edytujdane($router)
