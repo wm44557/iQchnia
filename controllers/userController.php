@@ -50,9 +50,13 @@ class userController
             }
             $newData = $_POST;
             $recipe->createRecipe($newData);
+            $fromTitle = $recipe->getRecipeFromTitle($_SESSION['user_id'], $_POST['title']);
             $router->render('pages/user/dodajskladniki', [
-                'dane' => 'UDALO SIE PRZESLAC',
-
+                'title' => $_POST['title'],
+                'recipeData' => $fromTitle,
+                'units' => $recipe->getAllUnits(),
+                'ingredients' => $recipe->getAllIngredients(),
+                're_in_data' => $recipe->getRecipeIngredients($fromTitle->id)
             ]);
         }
 
@@ -60,7 +64,7 @@ class userController
             'dane' => $recipe->getAllIngredients(),
             'category' => $recipe->getAllCategories(),
             'difficulties' => $recipe->getAllDifficulties(),
-            'diets' => $recipe->getAllDiets()
+            'diets' => $recipe->getAllDiets(),
 
         ]);
     }
@@ -69,7 +73,17 @@ class userController
     {
         Permissions::check("user");
         $user = new User();
-        $router->render("pages/user/dodajskladniki", []);
+        $recipe = new Recipe();
+        if (isset($_POST['dodajKolejny'])) {
+            $recipe->createRecipeIngredients($_POST);
+            $router->render("pages/user/dodajskladniki", [
+                'recipeData' => $recipe->getRecipeFromId($_SESSION['user_id'], $_POST['recipe_id']),
+                'units' => $recipe->getAllUnits(),
+                'ingredients' => $recipe->getAllIngredients(),
+                're_in_data' => $recipe->getRecipeIngredients($_POST['recipe_id'])
+            ]);
+        } else {
+        }
     }
     public function edytujdane($router)
     {
