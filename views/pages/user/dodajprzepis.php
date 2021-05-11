@@ -1,7 +1,7 @@
 <div class="container">
     <div class="panelContentUser">
         <!-- <?php dump($params['category']); ?> -->
-        <form class="formRecipe" method="post">
+        <form class="formRecipe" method="post" enctype="multipart/form-data">
 
             <div class="field">
                 <label class="label">Tytuł</label>
@@ -69,9 +69,9 @@
                 </div>
             </div>
 
-            <div class="file ">
+            <!-- <div class="file ">
                 <label class="file-label ">
-                    <input class="file-input " type="file" name="photo" value=''>
+                    <input class="file-input " type="file" name="file" value=''>
                     <span class="file-cta">
                         <span class="file-icon">
                             <i class="fas fa-upload"></i>
@@ -81,8 +81,9 @@
                         </span>
                     </span>
                 </label>
-            </div>
+            </div> -->
 
+            <input type="file" name="file">
 
 
             <input id="creator" name="creator" type="hidden" value=<?php echo $_SESSION['user_id']; ?> />

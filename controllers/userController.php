@@ -37,6 +37,7 @@ class userController
         Permissions::check("user");
         $user = new User();
         $recipe = new Recipe();
+        dump($_FILES);
 
         if (isset($_POST['zapisz_dane'])) {
             if (
@@ -48,8 +49,16 @@ class userController
                 && empty($_POST['creator'])
             ) {
             }
+            $stripped = str_replace(' ', '', $_POST['title']);
             $newData = $_POST;
-            $recipe->createRecipe($newData);
+            if ($_FILES['file']['name']) {
+                $dir = "media/" . $stripped . $_FILES['file']['name'];
+            } else {
+                $dir = "media/default.jpg";
+            }
+            move_uploaded_file($_FILES['file']['tmp_name'], $dir);
+
+            $recipe->createRecipe($newData, $dir);
             $fromTitle = $recipe->getRecipeFromTitle($_SESSION['user_id'], $_POST['title']);
             $router->render('pages/user/dodajskladniki', [
                 'title' => $_POST['title'],
