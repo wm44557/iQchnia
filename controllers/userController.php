@@ -20,26 +20,34 @@ class userController
         $user = new User();
         $recipe = new Recipe();
         $data = $recipe->getRecipes();
+
         foreach ($data as $item) {
             $item->ingredients = $recipe->getRecipeIngredients($item->id);
+            $item->tag = '';
         };
 
 
         foreach ($data as $item) {
             foreach ($item->ingredients as $itemIngredients) {
                 $item->tag .= $itemIngredients->name;
+                unset($item->ingredients);
             }
         }
-
-
-
-
-
-
-
-
         $router->render("pages/user/przepisy", [
             'recipes' => $data,
+        ]);
+    }
+    public function przepis($router)
+    {
+        Permissions::check("user");
+        $user = new User();
+        $recipe = new Recipe();
+        $data = $recipe->getOneRecipe($_GET['id']);
+        $ingredients = $recipe->getRecipeIngredients($_GET['id']);
+
+        $router->render("pages/user/przepis", [
+            'recipe' => $data,
+            'ingredients' => $ingredients,
         ]);
     }
     public function mojeprzepisy($router)

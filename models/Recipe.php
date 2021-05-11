@@ -84,6 +84,21 @@ class Recipe
         $result = $this->conn->single();
         return $result;
     }
+    public function getOneRecipe($id)
+    {
+        $this->conn = new Database();
+        $this->conn->query('SELECT recipes.id,recipes.difficulty, recipes.title, recipes.description, recipes.photo, users.login,  difficulties.name AS difficulties, recipes.calories, diets.name AS diets, categories.name  as category
+        FROM recipes 
+        LEFT JOIN users ON recipes.creator = users.id  
+        LEFT JOIN difficulties ON recipes.difficulty = difficulties.id 
+        LEFT JOIN diets ON recipes.diet = diets.id 
+        LEFT JOIN categories ON recipes.category = categories.id 
+        
+        WHERE recipes.id = :id');
+        $this->conn->bindValue("id", $id);
+        $result = $this->conn->single();
+        return $result;
+    }
     public function getRecipeIngredients($id)
     {
         $this->conn = new Database();

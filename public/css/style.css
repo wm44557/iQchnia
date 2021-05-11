@@ -43,7 +43,7 @@ html {
     padding: 40px !important;
 }
 
-.tag {
+.tag2 {
     font-size: 8px !important;
     font-style: italic;
 }
@@ -125,9 +125,47 @@ textarea:focus {
 .item {
     width: 70%;
     margin: 0 auto;
-    margin-top: 30px !important;
-    max-height: 200px !important;
+    margin-top: 15px !important;
+    max-height: 120px !important;
 
+}
+
+#single {
+    height: 200px;
+    width: 200px;
+    margin: 0 auto;
+}
+
+table {
+    margin: 0 auto !important;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+img {
+    height: 100px;
+    width: 100px;
+    margin-top: 0;
+}
+
+.box {
+    position: relative !important;
+    height: 120px !important;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.content2 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    padding: 12px;
+}
+
+a {
+    margin-right: 5px;
 }
 
 .overflow-ellipsis {

@@ -27,6 +27,9 @@ $router->post('/register', [loginController::class, 'register']);
 $router->get('/user/przepisy', [userController::class, 'przepisy']);
 $router->post('/user/przepisy', [userController::class, 'przepisy']);
 
+$router->get('/user/przepis', [userController::class, 'przepis']);
+$router->post('/user/przepis', [userController::class, 'przepis']);
+
 
 $router->get('/user/mojeprzepisy', [userController::class, 'mojeprzepisy']);
 $router->post('/user/mojeprzepisy', [userController::class, 'mojeprzepisy']);

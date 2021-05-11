@@ -8,13 +8,9 @@
                         <div class="box">
                             <article class="media">
                                 <div class="media-left">
-                                    <figure class="image is-128x128">
                                         <img src="/iQchnia/public/' . $recipe->photo . '" alt="Image">
-                                    </figure>
                                 </div>
                                 <div class="media-content">
-                                    <div class="content">
-                                        <p>
                                             <strong>' . $recipe->name . '</strong> <small>@' . $recipe->login . '</small> <small></small>
                                             <br>
                                             <strong>' . $recipe->title . '</strong>
@@ -26,23 +22,17 @@
 
                                             <br>
 
-                                        </p>
 
-                                        
-                                    </div>
-                                    <nav class="level is-mobile">
-                                        <div class="level-left">
-            
-                                            <a class="level-item" aria-label="like">
-                                                <span class="icon is-small">
-                                                    <i class="fas fa-heart" aria-hidden="true"></i>
-                                                </span>
-                                            </a>
-                                            <form action="<?php echo STARTING_URL ?>/" method="post"><input class="button is-small" type="submit" value="Zobacz przepis"></form>
-            
+                                            <div class="content2">
+                                                <a class="level-item" aria-label="like">
+                                                    <span class="icon is-small">
+                                                        <i class="fas fa-heart" aria-hidden="true"></i>
+                                                    </span>
+                                                </a>
+                                            <form action="' . STARTING_URL . '/user/przepis?id=' . $recipe->id . '" method="post"><input class="button is-small" type="submit" value="Zobacz przepis"></form>
                                         </div>
-                                    </nav>
-                                </div>
+                                    </div>
+                                   
                             </article>
                         </div>
                     </li>
@@ -64,11 +54,7 @@
     const liElements = document.querySelectorAll('li');
     const input = document.getElementById("in");
     const ul = document.querySelector('ul');
-    console.log({
-        liElements,
-        input,
-        ul
-    });
+
     const searchTask = (e) => {
         let searchText = e.target.value.toLowerCase();
         let searchTextArray = searchText.split(" ");
