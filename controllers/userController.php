@@ -19,8 +19,27 @@ class userController
         Permissions::check("user");
         $user = new User();
         $recipe = new Recipe();
+        $data = $recipe->getRecipes();
+        foreach ($data as $item) {
+            $item->ingredients = $recipe->getRecipeIngredients($item->id);
+        };
+
+
+        foreach ($data as $item) {
+            foreach ($item->ingredients as $itemIngredients) {
+                $item->tag .= $itemIngredients->name;
+            }
+        }
+
+
+
+
+
+
+
+
         $router->render("pages/user/przepisy", [
-            'recipes' => $recipe->getRecipes(),
+            'recipes' => $data,
         ]);
     }
     public function mojeprzepisy($router)

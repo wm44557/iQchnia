@@ -1,8 +1,10 @@
 <div class="container">
-    <div class=" panelContentUser">
-        <?php foreach ($params['recipes'] as $recipe) {
-            echo '
-                        <div class="item">
+    <div class="panelContentUser2">
+        <input class="input is-large" type="text" id="in" placeholder="Wpisz tutaj składniki">
+        <ul>
+            <?php foreach ($params['recipes'] as $recipe) {
+                echo '
+                        <li class="item" data-tags="' . $recipe->tag . '">
                         <div class="box">
                             <article class="media">
                                 <div class="media-left">
@@ -18,10 +20,15 @@
                                             <strong>' . $recipe->title . '</strong>
                                             <br>
 
+
+
                                             <p class="overflow-ellipsis">' . $recipe->description . '</p>
+
                                             <br>
-            
+
                                         </p>
+
+                                        
                                     </div>
                                     <nav class="level is-mobile">
                                         <div class="level-left">
@@ -38,17 +45,43 @@
                                 </div>
                             </article>
                         </div>
-                    </div>
+                    </li>
                         
                         
                         
                         
                         ';
-        }
-        ?>
+            }
+            ?>
 
 
-
+        </ul>
     </div>
 
 </div>
+
+<script>
+    const liElements = document.querySelectorAll('li');
+    const input = document.getElementById("in");
+    const ul = document.querySelector('ul');
+    console.log({
+        liElements,
+        input,
+        ul
+    });
+    const searchTask = (e) => {
+        let searchText = e.target.value.toLowerCase();
+        let searchTextArray = searchText.split(" ");
+        let recipes = [...liElements];
+        console.log(searchTextArray);
+        searchTextArray.forEach(searchTextArrayItem =>
+            recipes = recipes.filter(li => li.dataset.tags.toLocaleLowerCase().includes(searchTextArrayItem))
+        )
+        console.log(recipes)
+
+        ul.textContent = "";
+        recipes.forEach(li => ul.appendChild(li))
+
+    }
+    input.addEventListener('input', searchTask)
+</script>
