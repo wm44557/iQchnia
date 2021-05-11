@@ -18,7 +18,10 @@ class userController
     {
         Permissions::check("user");
         $user = new User();
-        $router->render("pages/user/przepisy", []);
+        $recipe = new Recipe();
+        $router->render("pages/user/przepisy", [
+            'recipes' => $recipe->getRecipes(),
+        ]);
     }
     public function mojeprzepisy($router)
     {
@@ -37,7 +40,6 @@ class userController
         Permissions::check("user");
         $user = new User();
         $recipe = new Recipe();
-        dump($_FILES);
 
         if (isset($_POST['zapisz_dane'])) {
             if (

@@ -21,6 +21,13 @@ class Recipe
         $result = $this->conn->resultSet();
         return $result;
     }
+    public function getAllRecipes()
+    {
+        $this->conn = new Database();
+        $this->conn->query('SELECT * FROM recipes');
+        $result = $this->conn->resultSet();
+        return $result;
+    }
     public function getAllDifficulties()
     {
         $this->conn = new Database();
@@ -43,7 +50,7 @@ class Recipe
         $result = $this->conn->resultSet();
         return $result;
     }
-    public function createRecipe($dataRegister,$dir)
+    public function createRecipe($dataRegister, $dir)
     {
         $this->conn = new Database();
         $this->conn->query("INSERT INTO `recipes`(`title`, `description`, `creator`,`difficulty`, `calories`, `diet`, `category`,`photo`) VALUES (:title,:description,:creator,:difficulty,:calories,:diet,:category,:photo)");
@@ -96,6 +103,15 @@ class Recipe
     // LEFT JOIN ingredients ON recpie_ingredients.ingredient_id = ingredients.id 
     // LEFT JOIN units ON recpie_ingredients.unit = units.id 
     // WHERE recpie_ingredients.recipe_id = 61
+
+
+    public function getRecipes()
+    {
+        $this->conn = new Database();
+        $this->conn->query('SELECT recipes.id, recipes.title, recipes.description, recipes.photo, users.login, categories.name FROM recipes LEFT JOIN users ON recipes.creator = users.id LEFT JOIN categories ON recipes.category = categories.id');
+        $result = $this->conn->resultSet();
+        return $result;
+    }
 
     public function createRecipeIngredients($dataRegister)
     {

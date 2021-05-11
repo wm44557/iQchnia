@@ -85,12 +85,26 @@ html {
     width: 70%;
     margin: 0 auto;
     margin-top: 20px;
+    max-height: 200px !important;
 
+}
+
+.overflow-ellipsis {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 300px !important;
+}
+
+.image img {
+    object-fit: cover;
+    width: auto;
 }
 
 .is-dark:hover {
     opacity: 0.5;
 }
+
 
 .card .card-image {
     height: 50px;
