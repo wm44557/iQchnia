@@ -6,14 +6,14 @@
             <div class="field">
                 <label class="label">Tytuł</label>
                 <div class="control">
-                    <input class="input" type="text" placeholder="Podaj tytuł ..." name="title">
+                    <input required class="input" type="text" placeholder="Podaj tytuł ..." name="title">
                 </div>
             </div>
 
             <div class="field">
                 <label class="label">Opis</label>
                 <div class="control">
-                    <textarea class="textarea" placeholder="Podaj opis ..." name="description"></textarea>
+                    <textarea required class="textarea" placeholder="Podaj opis ..." name="description"></textarea>
                 </div>
             </div>
 
@@ -22,7 +22,7 @@
                 <label class="label">Wybierz kategorię</label>
                 <div class="field">
                     <div class="select  is-fullwidth">
-                        <select name="category">
+                        <select name="category" required>
                             <?php foreach ($params['category'] as $category) {
                                 echo "    <option value=\"" . $category->id . "\"> " . $category->name . "</option>";
                             }
@@ -49,7 +49,7 @@
             <div class="field">
                 <label class="label">Kalorie</label>
                 <div class="control">
-                    <input class="input" type="number" placeholder="Podaj liczbę kalorii..." name="calories">
+                    <input class="input" type="number" placeholder="Podaj liczbę kalorii..." name="calories" required>
                 </div>
             </div>
 
@@ -59,7 +59,7 @@
                 <label class="label">Wybierz typ kuchni</label>
                 <div class="field">
                     <div class="select  is-fullwidth">
-                        <select name="diet">
+                        <select name="diet" required>
                             <?php foreach ($params['diets'] as $diets) {
                                 echo "    <option value=\"" . $diets->id . "\"> " . $diets->name . "</option>";
                             }

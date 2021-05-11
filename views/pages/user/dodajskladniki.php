@@ -19,7 +19,7 @@
                 <label class="label">Wybierz składnik</label>
                 <div class="field">
                     <div class="select  is-fullwidth">
-                        <select name="ingredient_id">
+                        <select name="ingredient_id" required>
                             <?php foreach ($params['ingredients'] as $ingredient) {
                                 echo "    <option value=\"" . $ingredient->id . "\"> " . $ingredient->name . "</option>";
                             }
@@ -34,7 +34,7 @@
                 <label class="label">Wybierz jednostkę</label>
                 <div class="field">
                     <div class="select  is-fullwidth">
-                        <select name="unit">
+                        <select name="unit" required>
                             <?php foreach ($params['units'] as $units) {
                                 echo "    <option value=\"" . $units->id . "\"> " . $units->name . "</option>";
                             }
@@ -47,7 +47,7 @@
             <div class="field">
                 <label class="label">Podaj ilość</label>
                 <div class="control">
-                    <input class="input" type="number" placeholder="Podaj ilość ..." name="amount">
+                    <input class="input" type="number" placeholder="Podaj ilość ..." name="amount" required>
                 </div>
             </div>
 
