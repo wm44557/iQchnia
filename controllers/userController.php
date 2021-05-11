@@ -19,8 +19,30 @@ class userController
         Permissions::check("user");
         $user = new User();
         $recipe = new Recipe();
-        $data = $recipe->getRecipes();
 
+
+
+
+
+        if (!empty($_GET['diet']) && !empty($_GET['category']) && !empty($_GET['difficulty'])) {
+            $data = $recipe->getRecipesDietCategoryDifficultySearch($_GET);
+        } else if (!empty($_GET['diet']) && !empty($_GET['category'])) {
+            $data = $recipe->getRecipesDietCategorySearch($_GET);
+        } else if (!empty($_GET['difficulty']) && !empty($_GET['category'])) {
+            $data = $recipe->getRecipesCategoryDifficultySearch($_GET);
+        } else if (!empty($_GET['difficulty'])  && !empty($_GET['diet'])) {
+            $data = $recipe->getRecipesDietDifficultySearch($_GET);
+        } else if (!empty($_GET['diet'])) {
+            $data = $recipe->getRecipesDietSearch($_GET);
+        } else if (!empty($_GET['difficulty'])) {
+            $data = $recipe->getRecipesDifficultySearch($_GET);
+        } else if (
+            !empty($_GET['category'])
+        ) {
+            $data = $recipe->getRecipesCategorySearch($_GET);
+        } else {
+            $data = $recipe->getRecipes();
+        }
         foreach ($data as $item) {
             $item->ingredients = $recipe->getRecipeIngredients($item->id);
             $item->tag = '';
@@ -35,6 +57,9 @@ class userController
         }
         $router->render("pages/user/przepisy", [
             'recipes' => $data,
+            'difficulty' => $recipe->getAllDifficulties(),
+            'diets' => $recipe->getAllDiets(),
+            'category' => $recipe->getAllCategories(),
         ]);
     }
     public function przepis($router)

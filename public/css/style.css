@@ -43,6 +43,20 @@ html {
     padding: 40px !important;
 }
 
+.formSearch {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap !important;
+    margin-bottom: 10px;
+
+}
+
+.formSearch .box {
+    width: 30% !important;
+    max-height: 100px !important;
+
+}
+
 .tag2 {
     font-size: 8px !important;
     font-style: italic;
