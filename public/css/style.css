@@ -162,6 +162,11 @@ img {
     margin-top: 0;
 }
 
+.logoI {
+    height: 80px !important;
+    width: 80px !important;
+}
+
 .box {
     position: relative !important;
     height: 120px !important;
@@ -220,6 +225,28 @@ a {
 
 .left {
     text-align: left;
+}
+
+.navbar-start,
+.has-dropdown,
+.navbar-menu,
+.navbar-link {
+    text-align: center !important;
+    padding: 0 !important;
+
+}
+
+a {
+    padding: 10px !important;
+}
+
+.navbar-dropdown a {
+    color: cadetblue !important;
+}
+
+.navbar-link::after {
+    display: none !important;
+    padding: 0;
 }
 
 .error {

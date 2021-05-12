@@ -19,11 +19,6 @@ class userController
         Permissions::check("user");
         $user = new User();
         $recipe = new Recipe();
-
-
-
-
-
         if (!empty($_GET['diet']) && !empty($_GET['category']) && !empty($_GET['difficulty'])) {
             $data = $recipe->getRecipesDietCategoryDifficultySearch($_GET);
         } else if (!empty($_GET['diet']) && !empty($_GET['category'])) {
@@ -47,7 +42,6 @@ class userController
             $item->ingredients = $recipe->getRecipeIngredients($item->id);
             $item->tag = '';
         };
-
 
         foreach ($data as $item) {
             foreach ($item->ingredients as $itemIngredients) {
