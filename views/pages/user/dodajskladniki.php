@@ -14,7 +14,7 @@
             </ol>
         </div>
 
-        <form class="formRecipe" method="post" action="<?php echo STARTING_URL ?>/user/edytujskladniki?id=  ">
+        <form class="formRecipe" method="post" action="<?php echo STARTING_URL ?>/user/dodajskladniki">
             <div class="field">
                 <label class="label">Wybierz składnik</label>
                 <div class="field">

@@ -109,7 +109,7 @@ class userController
         $user = new User();
         $recipe = new Recipe();
         $data = $recipe->getRecipeIngredients($_GET['id']);
-        dump($_POST);
+        // dump($_POST);
         if (isset($_POST['deleteID'])) {
             $recipe->deleteIngredients($_GET['id'], $_POST['deleteID']);
             $data = $recipe->getRecipeIngredients($_GET['id']);
