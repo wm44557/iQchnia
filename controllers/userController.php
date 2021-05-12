@@ -71,8 +71,65 @@ class userController
     {
         Permissions::check("user");
         $user = new User();
-        $router->render("pages/user/mojeprzepisy", []);
+        $recipe = new Recipe();
+        if (isset($_GET['deleteID'])) {
+            $recipe->deleteRecipe($_GET['deleteID'], $_SESSION['user_id']);
+        };
+        $data = $recipe->getRecipesFromUserId($_SESSION['user_id']);
+
+        $router->render("pages/user/mojeprzepisy", [
+            'recipes' => $data,
+        ]);
     }
+    public function edytujtresc($router)
+    {
+        Permissions::check("user");
+        $user = new User();
+        $recipe = new Recipe();
+        $data = $recipe->getRecipeFromId($_SESSION['user_id'], $_GET['id']);
+        $info = '';
+
+        if (isset($_POST['edytuj_dane'])) {
+            $recipe->updateRecipe($_POST);
+            $info = "Pomyślnie edytowano treść przepisu";
+            $data = $recipe->getRecipeFromId($_SESSION['user_id'], $_GET['id']);
+        };
+
+        $router->render("pages/user/edytujtresc", [
+            'recipeData' => $data,
+            'difficulty' => $recipe->getAllDifficulties(),
+            'diets' => $recipe->getAllDiets(),
+            'category' => $recipe->getAllCategories(),
+            'info' => $info,
+        ]);
+    }
+    public function edytujskladniki($router)
+    {
+        Permissions::check("user");
+        $user = new User();
+        $recipe = new Recipe();
+        $data = $recipe->getRecipeIngredients($_GET['id']);
+        dump($_POST);
+        if (isset($_POST['deleteID'])) {
+            $recipe->deleteIngredients($_GET['id'], $_POST['deleteID']);
+            $data = $recipe->getRecipeIngredients($_GET['id']);
+        }
+        if (isset($_POST['dodajKolejny'])) {
+            $recipe->createRecipeIngredients($_POST);
+        }
+        $data = $recipe->getRecipeIngredients($_GET['id']);
+
+        $router->render("pages/user/edytujskladniki", [
+            're_in_data' => $data,
+            'units' => $recipe->getAllUnits(),
+            'ingredients' => $recipe->getAllIngredients(),
+        ]);
+    }
+
+
+
+
+
     public function ulubione($router)
     {
         Permissions::check("user");

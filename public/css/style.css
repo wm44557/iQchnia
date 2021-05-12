@@ -144,6 +144,13 @@ textarea:focus {
 
 }
 
+.item2 {
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 25px !important;
+    max-height: 170px !important;
+}
+
 #single {
     height: 200px;
     width: 200px;
@@ -174,13 +181,29 @@ img {
     padding: 10px;
 }
 
-.content2 {
+.box2 {
+    position: relative !important;
+    height: 170px !important;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.content2,
+.content23 {
     position: absolute;
     top: 0;
     right: 0;
     display: flex;
     flex-direction: row;
     padding: 12px;
+}
+
+.content23 form {
+    margin: 2px;
+}
+
+.content23 {
+    flex-direction: column;
 }
 
 a {
