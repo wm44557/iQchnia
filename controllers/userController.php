@@ -31,9 +31,7 @@ class userController
             $data = $recipe->getRecipesDietSearch($_GET);
         } else if (!empty($_GET['difficulty'])) {
             $data = $recipe->getRecipesDifficultySearch($_GET);
-        } else if (
-            !empty($_GET['category'])
-        ) {
+        } else if (!empty($_GET['category'])) {
             $data = $recipe->getRecipesCategorySearch($_GET);
         } else {
             $data = $recipe->getRecipes();
@@ -79,7 +77,49 @@ class userController
     {
         Permissions::check("user");
         $user = new User();
-        $router->render("pages/user/ulubione", []);
+        $recipe = new Recipe();
+
+        $info  = '';
+        $favRevipesRefresh = function ($recipe) {
+            $data = $recipe->getFavFromUserId($_SESSION['user_id']);
+
+            foreach ($data as $item) {
+                $item->ingredients = $recipe->getRecipeIngredients($item->id);
+                $item->tag = '';
+            };
+
+            foreach ($data as $item) {
+                foreach ($item->ingredients as $itemIngredients) {
+                    $item->tag .= $itemIngredients->name;
+                    unset($item->ingredients);
+                }
+            };
+
+            return $data;
+        };
+        $favRevipes = $favRevipesRefresh($recipe);
+
+        if (isset($_GET['liked'])) {
+            if ($recipe->getFav($_SESSION['user_id'], $_GET['liked'])) {
+                $info = "Posiadasz już w ulubionych";
+            } else {
+                $recipe->insertFav($_SESSION['user_id'], $_GET['liked']);
+                $info = "Pomyślnie dodano ogłoszenie";
+
+                $favRevipes = $favRevipesRefresh($recipe);
+            }
+        }
+
+        if (isset($_GET['delete'])) {
+            $recipe->deleteFav($_SESSION['user_id'], $_GET['delete']);
+            $info = "Pomyslnie usunięto";
+            $favRevipes = $recipe->getFavFromUserId($_SESSION['user_id']);
+            $favRevipes = $favRevipesRefresh($recipe);
+        };
+        $router->render("pages/user/ulubione", [
+            'info' => $info,
+            'favRevipes' => $favRevipes
+        ]);
     }
     public function dodajprzepis($router)
     {

@@ -76,11 +76,12 @@
 
 
                                             <div class="content2">
-                                                <a class="level-item" aria-label="like">
+                                                <a class="level-item" aria-label="like" href="' . STARTING_URL . '/user/ulubione?liked=' . $recipe->id . '">
                                                     <span class="icon is-small">
                                                         <i class="fas fa-heart" aria-hidden="true"></i>
                                                     </span>
                                                 </a>
+                                                
                                             <form action="' . STARTING_URL . '/user/przepis?id=' . $recipe->id . '" method="post"><input class="button is-small" type="submit" value="Zobacz przepis"></form>
                                         </div>
                                     </div>

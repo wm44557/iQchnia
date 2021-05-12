@@ -120,6 +120,47 @@ class Recipe
     // WHERE recpie_ingredients.recipe_id = 61
 
 
+
+    public function insertFav($usr_id, $rec_id)
+    {
+        $this->conn = new Database();
+        $this->conn->query('INSERT INTO `user_favourites` (`user_id`, `recipe_id`) VALUES (:usr_id, :rec_id)');
+        $this->conn->bindValue("usr_id", $usr_id);
+        $this->conn->bindValue("rec_id", $rec_id);
+        $this->conn->execute();
+    }
+    public function deleteFav($usr_id, $rec_id)
+    {
+        $this->conn = new Database();
+        $this->conn->query('DELETE FROM user_favourites  WHERE user_id = :usr_id AND recipe_id = :rec_id');
+        $this->conn->bindValue("usr_id", $usr_id);
+        $this->conn->bindValue("rec_id", $rec_id);
+        $this->conn->execute();
+    }
+    public function getFav($usr_id, $rec_id)
+    {
+        $this->conn = new Database();
+        $this->conn->query('SELECT * FROM user_favourites  WHERE user_id = :usr_id AND recipe_id = :rec_id');
+        $this->conn->bindValue("usr_id", $usr_id);
+        $this->conn->bindValue("rec_id", $rec_id);
+        $result = $this->conn->resultSet();
+        return $result;
+    }
+    public function getFavFromUserId($usr_id)
+    {
+        $this->conn = new Database();
+        $this->conn->query('SELECT user_favourites.user_id, recipes.id,recipes.title, recipes.description, recipes.photo, users.login, categories.name FROM user_favourites 
+        LEFT JOIN recipes ON recipes.id = recipe_id
+        LEFT JOIN users ON recipes.creator = users.id 
+        LEFT JOIN categories ON recipes.category = categories.id
+        WHERE user_favourites.user_id = :usr_id');
+        $this->conn->bindValue("usr_id", $usr_id);
+        $result = $this->conn->resultSet();
+        return $result;
+    }
+
+
+
     public function getRecipes()
     {
         $this->conn = new Database();
