@@ -11,77 +11,128 @@
   </div>
 </div>
 <div class="container">
-  <div class="columns">
-      <div class="column">
-        <div class="card">
-          <header class="card-header">
-            <p class="card-header-title">
-              Naleśniki z dżemorem
-            </p>
-          </header>
-            <figure class="image is-4by3">
-              <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-            </figure>
-          <div class="card-content">
-            <div class="content">
-              <p>Przepyszne naleśniczki z nadzieniem. Polecanko Bardzo</p>
-              <p class="has-text-left">Składniki: </p>
-              <ul class="block-list is-small is-outlined is-success is-left has-text-left">
-                <li><span class="tag is-primary">Dżemor</span></li>
-                <li>Placki</li>
-              </ul>
+    <div class="panelContentUser2">
+        <form method="get" class="formSearch">
+            <div class="field box is-small">
+                <label class="label is-small ">Wybierz kategorię</label>
+                <div class="field">
+                    <div class="select  is-small is-fullwidth">
+
+                        <select name="category">
+                            <option value=""></option>
+
+                            <?php foreach ($params['category'] as $category) {
+                                echo "    <option value=\"" . $category->id . "\"> " . $category->name . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
             </div>
-          </div>
-          <footer class="card-footer">
-            <a href="#" class="card-footer-item">Otwórz przepis</a>
-          </footer>
-        </div>
+
+            <div class="field box">
+                <label class="label is-small">Wybierz typ kuchni</label>
+                <div class="field">
+                    <div class="select  is-small is-fullwidth">
+                        <select name="diet">
+                            <option value=""></option>
+
+                            <?php foreach ($params['diets'] as $diets) {
+                                echo "    <option value=\"" . $diets->id . "\"> " . $diets->name . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field box">
+                <label class="label is-small">Wybierz poziom trudności</label>
+                <div class="field">
+                    <div class="select  is-small is-fullwidth">
+                        <select name="difficulty">
+                            <option value=""></option>
+                            <?php foreach ($params['difficulty'] as $difficulty) {
+                                echo "    <option value=\"" . $difficulty->id . "\"> " . $difficulty->name . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <input class="button is-small is-dark is-fullwidth" type="submit" value="Wyszukaj">
+        </form>
+
+        <!-- <?php dump($params['diets']) ?> -->
+
+        <input class="input is-medium" type="text" id="in" placeholder="Wpisz tutaj posiadane składniki">
+        <ul>
+            <?php foreach ($params['recipes'] as $recipe) {
+                echo '
+                        <li class="item" data-tags="' . $recipe->tag . '">
+                        <div class="box">
+                            <article class="media">
+                                <div class="media-left">
+                                        <img src="/iQchnia/public/' . $recipe->photo . '" alt="Image">
+                                </div>
+                                <div class="media-content">
+                                            <strong>' . $recipe->name . '</strong> <small>@' . $recipe->login . '</small> <small></small>
+                                            <br>
+                                            <strong>' . $recipe->title . '</strong>
+                                            <br>
+
+
+
+                                            <p class="overflow-ellipsis">' . $recipe->description . '</p>
+
+                                            <br>
+
+
+                                            <div class="content2">
+                                                <a class="level-item" aria-label="like" href="' . STARTING_URL . '/user/ulubione?liked=' . $recipe->id . '">
+                                                    <span class="icon is-small">
+                                                        <i class="fas fa-heart" aria-hidden="true"></i>
+                                                    </span>
+                                                </a>
+
+                                            <form action="' . STARTING_URL . '/user/przepis?id=' . $recipe->id . '" method="post"><input class="button is-small" type="submit" value="Zobacz przepis"></form>
+                                        </div>
+                                    </div>
+
+                            </article>
+                        </div>
+                    </li>
+
+
+
+
+                        ';
+            }
+            ?>
+
+
+        </ul>
     </div>
-    <div class="column">
-      <div class="card">
-        <header class="card-header">
-          <p class="card-header-title">
-            Naleśniki z dżemorem
-          </p>
-        </header>
-          <figure class="image is-4by3">
-            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-          </figure>
-        <div class="card-content">
-          <div class="content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
-            <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
-            <br>
-            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-          </div>
-        </div>
-        <footer class="card-footer">
-          <a href="#" class="card-footer-item">Otwórz przepis</a>
-        </footer>
-      </div>
-  </div>
-  <div class="column">
-    <div class="card">
-      <header class="card-header">
-        <p class="card-header-title">
-          Naleśniki z dżemorem
-        </p>
-      </header>
-        <figure class="image is-4by3">
-          <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-        </figure>
-      <div class="card-content">
-        <div class="content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
-          <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
-          <br>
-          <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-        </div>
-      </div>
-      <footer class="card-footer">
-        <a href="#" class="card-footer-item">Otwórz przepis</a>
-      </footer>
-    </div>
+
 </div>
-  </div>
-</div>
+
+<script>
+    const liElements = document.querySelectorAll('li');
+    const input = document.getElementById("in");
+    const ul = document.querySelector('ul');
+
+    const searchTask = (e) => {
+        let searchText = e.target.value.toLowerCase();
+        let searchTextArray = searchText.split(" ");
+        let recipes = [...liElements];
+        console.log(searchTextArray);
+        searchTextArray.forEach(searchTextArrayItem =>
+            recipes = recipes.filter(li => li.dataset.tags.toLocaleLowerCase().includes(searchTextArrayItem))
+        )
+        console.log(recipes)
+
+        ul.textContent = "";
+        recipes.forEach(li => ul.appendChild(li))
+
+    }
+    input.addEventListener('input', searchTask)
+</script>

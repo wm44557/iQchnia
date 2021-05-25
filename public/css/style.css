@@ -13,22 +13,23 @@ html {
     width: 100%;
     height: 100%;
     background-image: url('/iQchnia/public/images/food.jpg');
-    overflow: hidden;
+    overflow: auto;
 
     background-size: cover;
     position: absolute;
 }
 
 .container {
-    max-width: 1400px;
     text-align: center;
+
 }
 
 
 .navbar {
     padding: 5px 30px 5px 30px;
-    background-color: rgba(255, 255, 255, 0.98) !important;
-    border: 4px solid rgb(213, 51, 121);
+    background-color: rgba(255, 255, 255, 0.98);
+
+    border-bottom: 4px solid rgb(213, 51, 121);
     box-shadow: 1px 13px 118px -29px rgba(213, 51, 121, 0.73) !important;
     -webkit-box-shadow: 1px 13px 118px -29px rgba(213, 51, 121, 0.73);
     -moz-box-shadow: 1px 13px 118px -29px rgba(213, 51, 121, 0.73);
@@ -42,7 +43,24 @@ html {
     padding: 40px !important;
 }
 
+.formSearch {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap !important;
+    margin-bottom: 10px;
 
+}
+
+.formSearch .box {
+    width: 30% !important;
+    max-height: 100px !important;
+
+}
+
+.tag2 {
+    font-size: 8px !important;
+    font-style: italic;
+}
 
 .navbar-item2 {
     height: 90px;
@@ -50,14 +68,43 @@ html {
     margin-right: 40px;
 }
 
+.navbar-item {
+    height: 50%;
+    margin-top: 20px;
+}
+
 .panelContentUser {
+    width: 100%;
     margin: 0 auto;
-    min-height: 400px;
+    height: 100%;
+    overflow: auto !important;
     background-color: rgba(255, 255, 255, 0.98) !important;
     border: 4px solid rgb(213, 51, 121);
     box-shadow: 1px 13px 118px -29px rgba(213, 51, 121, 0.73) !important;
     -webkit-box-shadow: 1px 13px 118px -29px rgba(213, 51, 121, 0.73);
     -moz-box-shadow: 1px 13px 118px -29px rgba(213, 51, 121, 0.73);
+}
+
+.panelContentUser2 {
+    width: 100%;
+    margin: 0 auto;
+    height: 100%;
+    background-color: transparent !important;
+
+
+
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(90, 90, 90);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(90, 90, 90);
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
 }
 
 .login-form__background {
@@ -74,6 +121,16 @@ html {
     -moz-box-shadow: 1px 13px 118px -29px rgba(213, 51, 121, 0.73);
 }
 
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: rgb(213, 51, 121) !important;
+    forced-color-adjust: rgb(213, 51, 121) !important;
+    box-shadow: 1px 13px 118px -29px rgba(213, 51, 121, 0.73) !important;
+
+}
+
+
 .is-dark {
     background-color: rgb(213, 51, 121) !important;
     transition: .3s;
@@ -82,13 +139,93 @@ html {
 .item {
     width: 70%;
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 15px !important;
+    max-height: 120px !important;
 
+}
+
+.item2 {
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 25px !important;
+    max-height: 170px !important;
+}
+
+#single {
+    height: 200px;
+    width: 200px;
+    margin: 0 auto;
+}
+
+table {
+    margin: 0 auto !important;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+img {
+    height: 100px;
+    width: 100px;
+    margin-top: 0;
+}
+
+.logoI {
+    height: 80px !important;
+    width: 80px !important;
+}
+
+.box {
+    position: relative !important;
+    height: 120px !important;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.box2 {
+    position: relative !important;
+    height: 170px !important;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.content2,
+.content23 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    padding: 12px;
+}
+
+.content23 form {
+    margin: 2px;
+}
+
+.content23 {
+    flex-direction: column;
+}
+
+a {
+    margin-right: 5px;
+}
+
+.overflow-ellipsis {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 300px !important;
+}
+
+.image img {
+    object-fit: cover;
+    width: auto;
 }
 
 .is-dark:hover {
     opacity: 0.5;
 }
+
 
 .card .card-image {
     height: 50px;
@@ -111,6 +248,28 @@ html {
 
 .left {
     text-align: left;
+}
+
+.navbar-start,
+.has-dropdown,
+.navbar-menu,
+.navbar-link {
+    text-align: center !important;
+    padding: 0 !important;
+
+}
+
+a {
+    padding: 10px !important;
+}
+
+.navbar-dropdown a {
+    color: cadetblue !important;
+}
+
+.navbar-link::after {
+    display: none !important;
+    padding: 0;
 }
 
 .error {

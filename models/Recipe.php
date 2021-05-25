@@ -21,6 +21,13 @@ class Recipe
         $result = $this->conn->resultSet();
         return $result;
     }
+    public function getAllRecipes()
+    {
+        $this->conn = new Database();
+        $this->conn->query('SELECT * FROM recipes');
+        $result = $this->conn->resultSet();
+        return $result;
+    }
     public function getAllDifficulties()
     {
         $this->conn = new Database();
@@ -43,7 +50,16 @@ class Recipe
         $result = $this->conn->resultSet();
         return $result;
     }
-    public function createRecipe($dataRegister)
+    public function deleteIngredients($recipe_id, $ingredient_id)
+    {
+        $this->conn = new Database();
+        $this->conn->query("DELETE FROM recpie_ingredients WHERE recipe_id =:recipe_id AND ingredient_id=:ingredient_id");
+        $this->conn->bindValue("recipe_id", $recipe_id);
+        $this->conn->bindValue("ingredient_id", $ingredient_id);
+
+        $this->conn->execute();
+    }
+    public function createRecipe($dataRegister, $dir)
     {
         $this->conn = new Database();
         $this->conn->query("INSERT INTO `recipes`(`title`, `description`, `creator`,`difficulty`, `calories`, `diet`, `category`,`photo`) VALUES (:title,:description,:creator,:difficulty,:calories,:diet,:category,:photo)");
@@ -54,7 +70,32 @@ class Recipe
         $this->conn->bindValue("calories", $dataRegister['calories']);
         $this->conn->bindValue("diet", $dataRegister['diet']);
         $this->conn->bindValue("category", $dataRegister['category']);
-        $this->conn->bindValue("photo", $dataRegister['photo']);
+        $this->conn->bindValue("photo", $dir);
+        $this->conn->execute();
+    }
+    public function updateRecipe($data)
+    {
+        $this->conn = new Database();
+
+        $this->conn->query("UPDATE recipes SET title=:title, description=:description,calories=:calories, category=:category, diet=:diet, difficulty=:difficulty WHERE recipes.id = :id");
+
+        $this->conn->bindValue("title", $data['title']);
+        $this->conn->bindValue("description", $data['description']);
+        $this->conn->bindValue("category", $data['category']);
+        $this->conn->bindValue("diet", $data['diet']);
+        $this->conn->bindValue("difficulty", $data['difficulty']);
+        $this->conn->bindValue("calories", $data['calories']);
+
+        $this->conn->bindValue("id", $data['recipe_id']);
+
+        $this->conn->execute();
+    }
+    public function deleteRecipe($recipe_id, $user_id)
+    {
+        $this->conn = new Database();
+        $this->conn->query("DELETE FROM recipes WHERE recipes.id = :recipe_id AND recipes.creator = :user_id");
+        $this->conn->bindValue("recipe_id", $recipe_id);
+        $this->conn->bindValue("user_id", $user_id);
         $this->conn->execute();
     }
     public function getRecipeFromTitle($creator, $title)
@@ -76,10 +117,40 @@ class Recipe
         $result = $this->conn->single();
         return $result;
     }
+    public function getOneRecipe($id)
+    {
+        $this->conn = new Database();
+        $this->conn->query('SELECT recipes.id,recipes.difficulty, recipes.title, recipes.description, recipes.photo, users.login,  difficulties.name AS difficulties, recipes.calories, diets.name AS diets, categories.name  as category
+        FROM recipes 
+        LEFT JOIN users ON recipes.creator = users.id  
+        LEFT JOIN difficulties ON recipes.difficulty = difficulties.id 
+        LEFT JOIN diets ON recipes.diet = diets.id 
+        LEFT JOIN categories ON recipes.category = categories.id 
+        
+        WHERE recipes.id = :id');
+        $this->conn->bindValue("id", $id);
+        $result = $this->conn->single();
+        return $result;
+    }
+    public function getRecipesFromUserId($id)
+    {
+        $this->conn = new Database();
+        $this->conn->query('SELECT recipes.id,recipes.difficulty, recipes.title, recipes.description, recipes.photo, users.login,  difficulties.name AS difficulties, recipes.calories, diets.name AS diets, categories.name  as category
+        FROM recipes 
+        LEFT JOIN users ON recipes.creator = users.id  
+        LEFT JOIN difficulties ON recipes.difficulty = difficulties.id 
+        LEFT JOIN diets ON recipes.diet = diets.id 
+        LEFT JOIN categories ON recipes.category = categories.id 
+        
+        WHERE recipes.creator = :id');
+        $this->conn->bindValue("id", $id);
+        $result = $this->conn->resultSet();
+        return $result;
+    }
     public function getRecipeIngredients($id)
     {
         $this->conn = new Database();
-        $this->conn->query('SELECT recpie_ingredients.amount,ingredients.name,units.name as unitName
+        $this->conn->query('SELECT recpie_ingredients.amount,ingredients.name,ingredients.id,units.name as unitName
                             FROM recpie_ingredients 
                             LEFT JOIN ingredients ON recpie_ingredients.ingredient_id = ingredients.id
                             LEFT JOIN units ON recpie_ingredients.unit = units.id 
@@ -95,6 +166,170 @@ class Recipe
     // LEFT JOIN ingredients ON recpie_ingredients.ingredient_id = ingredients.id 
     // LEFT JOIN units ON recpie_ingredients.unit = units.id 
     // WHERE recpie_ingredients.recipe_id = 61
+
+
+
+    public function insertFav($usr_id, $rec_id)
+    {
+        $this->conn = new Database();
+        $this->conn->query('INSERT INTO `user_favourites` (`user_id`, `recipe_id`) VALUES (:usr_id, :rec_id)');
+        $this->conn->bindValue("usr_id", $usr_id);
+        $this->conn->bindValue("rec_id", $rec_id);
+        $this->conn->execute();
+    }
+    public function deleteFav($usr_id, $rec_id)
+    {
+        $this->conn = new Database();
+        $this->conn->query('DELETE FROM user_favourites  WHERE user_id = :usr_id AND recipe_id = :rec_id');
+        $this->conn->bindValue("usr_id", $usr_id);
+        $this->conn->bindValue("rec_id", $rec_id);
+        $this->conn->execute();
+    }
+    public function getFav($usr_id, $rec_id)
+    {
+        $this->conn = new Database();
+        $this->conn->query('SELECT * FROM user_favourites  WHERE user_id = :usr_id AND recipe_id = :rec_id');
+        $this->conn->bindValue("usr_id", $usr_id);
+        $this->conn->bindValue("rec_id", $rec_id);
+        $result = $this->conn->resultSet();
+        return $result;
+    }
+    public function getFavFromUserId($usr_id)
+    {
+        $this->conn = new Database();
+        $this->conn->query('SELECT user_favourites.user_id, recipes.id,recipes.title, recipes.description, recipes.photo, users.login, categories.name FROM user_favourites 
+        LEFT JOIN recipes ON recipes.id = recipe_id
+        LEFT JOIN users ON recipes.creator = users.id 
+        LEFT JOIN categories ON recipes.category = categories.id
+        WHERE user_favourites.user_id = :usr_id');
+        $this->conn->bindValue("usr_id", $usr_id);
+        $result = $this->conn->resultSet();
+        return $result;
+    }
+
+
+
+    public function getRecipes()
+    {
+        $this->conn = new Database();
+        $this->conn->query('SELECT recipes.id, recipes.title, recipes.description, recipes.photo, users.login, categories.name FROM recipes LEFT JOIN users ON recipes.creator = users.id LEFT JOIN categories ON recipes.category = categories.id');
+        $result = $this->conn->resultSet();
+        return $result;
+    }
+    public function getRecipesCategorySearch($data)
+    {
+        $this->conn = new Database();
+        $this->conn->query('SELECT recipes.id, recipes.title, recipes.description, recipes.photo, users.login, categories.name
+         FROM recipes 
+         LEFT JOIN users ON recipes.creator = users.id 
+         LEFT JOIN categories ON recipes.category = categories.id 
+         WHERE recipes.category = :category ');
+        $this->conn->bindValue("category", $data['category']);
+        $result = $this->conn->resultSet();
+        return $result;
+    }
+    public function getRecipesDietSearch($data)
+    {
+        $this->conn = new Database();
+        $this->conn->query('SELECT recipes.id, recipes.title, recipes.description, recipes.photo, users.login, categories.name
+         FROM recipes 
+         LEFT JOIN users ON recipes.creator = users.id 
+         LEFT JOIN categories ON recipes.category = categories.id 
+         WHERE recipes.diet = :diet 
+         
+         ');
+        $this->conn->bindValue("diet", $data['diet']);
+        $result = $this->conn->resultSet();
+        return $result;
+    }
+    public function getRecipesDifficultySearch($data)
+    {
+        $this->conn = new Database();
+        $this->conn->query('SELECT recipes.id, recipes.title, recipes.description, recipes.photo, users.login, categories.name
+         FROM recipes 
+         LEFT JOIN users ON recipes.creator = users.id 
+         LEFT JOIN categories ON recipes.category = categories.id 
+         WHERE recipes.difficulty = :difficulty 
+         
+         ');
+        $this->conn->bindValue("difficulty", $data['difficulty']);
+        $result = $this->conn->resultSet();
+        return $result;
+    }
+    public function getRecipesDietCategorySearch($data)
+    {
+        $this->conn = new Database();
+        $this->conn->query('SELECT recipes.id, recipes.title, recipes.description, recipes.photo, users.login, categories.name
+         FROM recipes 
+         LEFT JOIN users ON recipes.creator = users.id 
+         LEFT JOIN categories ON recipes.category = categories.id 
+         WHERE recipes.diet = :diet 
+         AND recipes.category = :category
+         
+         ');
+        $this->conn->bindValue("diet", $data['diet']);
+        $this->conn->bindValue("category", $data['category']);
+
+        $result = $this->conn->resultSet();
+        return $result;
+    }
+    public function getRecipesDietCategoryDifficultySearch($data)
+    {
+        $this->conn = new Database();
+        $this->conn->query('SELECT recipes.id, recipes.title, recipes.description, recipes.photo, users.login, categories.name
+         FROM recipes 
+         LEFT JOIN users ON recipes.creator = users.id 
+         LEFT JOIN categories ON recipes.category = categories.id 
+         WHERE recipes.diet = :diet 
+         AND recipes.category = :category
+         AND recipes.difficulty=:difficulty
+         
+         ');
+        $this->conn->bindValue("diet", $data['diet']);
+        $this->conn->bindValue("category", $data['category']);
+        $this->conn->bindValue("difficulty", $data['difficulty']);
+
+        $result = $this->conn->resultSet();
+        return $result;
+    }
+    public function getRecipesDietDifficultySearch($data)
+    {
+        $this->conn = new Database();
+        $this->conn->query('SELECT recipes.id, recipes.title, recipes.description, recipes.photo, users.login, categories.name
+         FROM recipes 
+         LEFT JOIN users ON recipes.creator = users.id 
+         LEFT JOIN categories ON recipes.category = categories.id 
+         WHERE recipes.diet = :diet 
+         AND recipes.difficulty=:difficulty
+        
+         ');
+        $this->conn->bindValue("diet", $data['diet']);
+        $this->conn->bindValue("difficulty", $data['difficulty']);
+
+        $result = $this->conn->resultSet();
+        return $result;
+    }
+    public function getRecipesCategoryDifficultySearch($data)
+    {
+        $this->conn = new Database();
+        $this->conn->query('SELECT recipes.id, recipes.title, recipes.description, recipes.photo, users.login, categories.name
+         FROM recipes 
+         LEFT JOIN users ON recipes.creator = users.id 
+         LEFT JOIN categories ON recipes.category = categories.id 
+         WHERE recipes.category = :category
+         AND recipes.difficulty=:difficulty
+         
+         ');
+        $this->conn->bindValue("category", $data['category']);
+        $this->conn->bindValue("difficulty", $data['difficulty']);
+
+        $result = $this->conn->resultSet();
+        return $result;
+    }
+
+
+
+
 
     public function createRecipeIngredients($dataRegister)
     {

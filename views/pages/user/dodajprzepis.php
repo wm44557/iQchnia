@@ -1,19 +1,19 @@
 <div class="container">
     <div class="panelContentUser">
         <!-- <?php dump($params['category']); ?> -->
-        <form class="formRecipe" method="post">
+        <form class="formRecipe" method="post" enctype="multipart/form-data">
 
             <div class="field">
                 <label class="label">Tytuł</label>
                 <div class="control">
-                    <input class="input" type="text" placeholder="Podaj tytuł ..." name="title">
+                    <input required class="input" type="text" placeholder="Podaj tytuł ..." name="title">
                 </div>
             </div>
 
             <div class="field">
                 <label class="label">Opis</label>
                 <div class="control">
-                    <textarea class="textarea" placeholder="Podaj opis ..." name="description"></textarea>
+                    <textarea required class="textarea" placeholder="Podaj opis ..." name="description"></textarea>
                 </div>
             </div>
 
@@ -22,7 +22,7 @@
                 <label class="label">Wybierz kategorię</label>
                 <div class="field">
                     <div class="select  is-fullwidth">
-                        <select name="category">
+                        <select name="category" required>
                             <?php foreach ($params['category'] as $category) {
                                 echo "    <option value=\"" . $category->id . "\"> " . $category->name . "</option>";
                             }
@@ -49,7 +49,7 @@
             <div class="field">
                 <label class="label">Kalorie</label>
                 <div class="control">
-                    <input class="input" type="number" placeholder="Podaj liczbę kalorii..." name="calories">
+                    <input class="input" type="number" placeholder="Podaj liczbę kalorii..." name="calories" required>
                 </div>
             </div>
 
@@ -59,7 +59,7 @@
                 <label class="label">Wybierz typ kuchni</label>
                 <div class="field">
                     <div class="select  is-fullwidth">
-                        <select name="diet">
+                        <select name="diet" required>
                             <?php foreach ($params['diets'] as $diets) {
                                 echo "    <option value=\"" . $diets->id . "\"> " . $diets->name . "</option>";
                             }
@@ -69,9 +69,9 @@
                 </div>
             </div>
 
-            <div class="file ">
+            <!-- <div class="file ">
                 <label class="file-label ">
-                    <input class="file-input " type="file" name="photo" value=''>
+                    <input class="file-input " type="file" name="file" value=''>
                     <span class="file-cta">
                         <span class="file-icon">
                             <i class="fas fa-upload"></i>
@@ -81,8 +81,9 @@
                         </span>
                     </span>
                 </label>
-            </div>
+            </div> -->
 
+            <input type="file" name="file">
 
 
             <input id="creator" name="creator" type="hidden" value=<?php echo $_SESSION['user_id']; ?> />

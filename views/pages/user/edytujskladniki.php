@@ -2,19 +2,21 @@
     <div class="panelContentUser">
         <br>
         <div class="content is-large">
-            Dodaj składniki do przepisu <b><?php echo $params['recipeData']->title; ?>
             </b>
 
         </div>
         <div class="content is-medium">
             <ol type="1"> <?php foreach ($params['re_in_data'] as $item) {
                                 echo "    <li> " . "  " . $item->amount . " " .  $item->unitName . " Składnika : " . $item->name . "</li>";
+                                echo '<form action="' . STARTING_URL . '/user/edytujskladniki?id=' . $_GET['id'] . '" method="post">
+                                <input id="creator" name="deleteID" type="hidden" value=' . $item->id . '>
+                                <input class="button is-small is-danger" type="submit" value="Usuń przepis"></form>';
                             }
                             ?>
             </ol>
         </div>
 
-        <form class="formRecipe" method="post" action="<?php echo STARTING_URL ?>/user/dodajskladniki">
+        <form class="formRecipe" method="post" <?php echo 'action="' . STARTING_URL . '/user/edytujskladniki?id=' . $_GET['id'] . '"' ?>>
             <div class="field">
                 <label class="label">Wybierz składnik</label>
                 <div class="field">
@@ -52,9 +54,9 @@
             </div>
 
 
-            <input id="recipe_id" name="recipe_id" type="hidden" value=<?php if (isset($params['recipeData']->id)) : ?> <?php echo $params['recipeData']->id ?> <?php endif; ?> />
+            <input id="recipe_id" name="recipe_id" type="hidden" value=<?php echo $_GET['id'] ?> />
             <input id="creator" name="creator" type="hidden" value=<?php echo $_SESSION['user_id']; ?> />
-            <input class="button is-dark" type="submit" name="dodajKolejny" value="dodajKolejny">
+            <input class="button is-dark" type="submit" name="dodajKolejny" value="Dodaj nowy składnik">
         </form>
 
 
