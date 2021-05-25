@@ -1,18 +1,9 @@
-<div class="container mb-4">
-  <div class="field has-addons is-danger">
-    <div class="control is-expanded">
-      <input class="input is-large" type="text" placeholder="Wyszukaj przepis po składnikach lub po nazwie..">
-    </div>
-    <div class="control">
-      <a class="button is-large is-danger">
-        Szukaj
-      </a>
-    </div>
-  </div>
-</div>
+
 <div class="container">
     <div class="panelContentUser2">
-        <form method="get" class="formSearch">
+    <div class="container has-background-light p-3">
+      <div class="container is-max-desktop">
+        <form method="get" class="formSearch" id="searchform">
             <div class="field box is-small">
                 <label class="label is-small ">Wybierz kategorię</label>
                 <div class="field">
@@ -29,7 +20,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="field box">
                 <label class="label is-small">Wybierz typ kuchni</label>
                 <div class="field">
@@ -59,16 +49,58 @@
                     </div>
                 </div>
             </div>
-            <input class="button is-small is-dark is-fullwidth" type="submit" value="Wyszukaj">
         </form>
 
         <!-- <?php dump($params['diets']) ?> -->
 
-        <input class="input is-medium" type="text" id="in" placeholder="Wpisz tutaj posiadane składniki">
-        <ul>
+      <!--  <input class="input is-medium" type="text" id="in" placeholder="Wpisz tutaj posiadane składniki"> -->
+        <div class="field has-addons ">
+          <div class="control is-expanded">
+            <input class="input" type="text" id="ins" placeholder="wpisz składniki">
+          </div>
+          <div class="control">
+            <a class="button is-info is-dark " href="">
+              Szukaj
+            </a>
+          </div>
+        </div>
+        <!-- <input class="button is-small is-dark  my-2" type="submit" value="Wyszukaj" form="searchform"> -->
+      </div>
+
+        <ul id="res">
             <?php foreach ($params['recipes'] as $recipe) {
+              echo '
+                      <li class="item lres" data-tags="' . $recipe->tag . '">
+                      <div class="box">
+
+                      <div class="columns">
+                      <div class="column">
+                        <h2 class="title"> '. $recipe->title .' </h2>
+                        <h3 class="subtitle">'. $recipe->name .'</h2>
+
+                      </div>
+                      <div class="column">
+                        Second column
+                      </div>
+                      <div class="column">
+                        Third column
+                      </div>
+                      <div class="column">
+                        Fourth column
+                      </div>
+                      </div>
+                      </div>
+                      </li>
+
+
+
+
+                      ';
+//-------------------------
+//OLD ->
+//-------------------------
                 echo '
-                        <li class="item" data-tags="' . $recipe->tag . '">
+                        <li class="item lres" data-tags="' . $recipe->tag . '">
                         <div class="box">
                             <article class="media">
                                 <div class="media-left">
@@ -77,7 +109,7 @@
                                 <div class="media-content">
                                             <strong>' . $recipe->name . '</strong> <small>@' . $recipe->login . '</small> <small></small>
                                             <br>
-                                            <strong>' . $recipe->title . '</strong>
+                                            <strong">' . $recipe->title . '</strong>
                                             <br>
 
 
@@ -109,16 +141,44 @@
             }
             ?>
 
-
         </ul>
+        <div class="container is-max-desktop ">
+        <nav class="pagination is-rounded my-3" role="navigation" aria-label="pagination">
+          <a class="pagination-previous ">Poprzednia</a>
+          <a class="pagination-next ">Następna</a>
+          <ul class="pagination-list ">
+            <li>
+              <a class="pagination-link " aria-label="Goto page 1">1</a>
+            </li>
+            <li>
+              <span class="pagination-ellipsis ">&hellip;</span>
+            </li>
+            <li>
+              <a class="pagination-link " aria-label="Goto page 45">45</a>
+            </li>
+            <li>
+              <a class="pagination-link is-dark" aria-label="Page 46" aria-current="page">46</a>
+            </li>
+            <li>
+              <a class="pagination-link " aria-label="Goto page 47">47</a>
+            </li>
+            <li>
+              <span class="pagination-ellipsis ">&hellip;</span>
+            </li>
+            <li>
+              <a class="pagination-link " aria-label="Goto page 86">86</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      </div>
     </div>
-
 </div>
 
 <script>
-    const liElements = document.querySelectorAll('li');
-    const input = document.getElementById("in");
-    const ul = document.querySelector('ul');
+    const liElements = document.querySelectorAll('.lres');
+    const input = document.getElementById("ins");
+    const ul = document.getElementById('res');
 
     const searchTask = (e) => {
         let searchText = e.target.value.toLowerCase();
