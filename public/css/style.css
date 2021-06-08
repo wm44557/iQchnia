@@ -219,7 +219,9 @@ a {
     opacity: 0.5;
 }
 
-
+.columns {
+  flex-wrap: wrap !important;
+}
 
 
 .space {
