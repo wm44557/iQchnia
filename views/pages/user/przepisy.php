@@ -67,123 +67,74 @@
         <!-- <input class="button is-small is-dark  my-2" type="submit" value="Wyszukaj" form="searchform"> -->
       </div>
 
-        <ul id="res">
-            <?php foreach ($params['recipes'] as $recipe) {
+      <section class="container mt-5" id="res">
+           <div class="columns features is-multiline is-vcentered" >
+
+            <?php
+            $cnt = 0;
+            foreach ($params['recipes'] as $recipe) {
+
+              if ($cnt==3){
+                echo '</div><div class="columns features is-vcentered is-multiline">';
+                $cnt = 0;
+              }
               echo '
-                      <li class="item lres" data-tags="' . $recipe->tag . '">
-                      <div class="box">
+            <div class="rec column is-4 " data-tags="' . $recipe->tag . '">
+              <div class="card">
+                <div class="card-image">
+                <figure class="image is-4by3">
+                <img src="/iQchnia/public/' . $recipe->photo . '" alt="Placeholder image">
+                </figure>
+                </div>
+                <div class="card-content">
+                <div class="media">
+                <div class="media-left">
+                </div>
+                <div class="media-content">
+                  <p class="title is-4">' . $recipe->title . '</p>
+                  <p class="subtitle is-6">@' . $recipe->login . '</p>
+                </div>
+                </div>
 
-                      <div class="columns">
-                      <div class="column">
-                        <h2 class="title"> '. $recipe->title .' </h2>
-                        <h3 class="subtitle">'. $recipe->name .'</h2>
-
-                      </div>
-                      <div class="column">
-                        Second column
-                      </div>
-                      <div class="column">
-                        Third column
-                      </div>
-                      <div class="column">
-                        Fourth column
-                      </div>
-                      </div>
-                      </div>
-                      </li>
+                <div class="content overflow-ellipsis">
+                ' . $recipe->description . '
+                <br>
+                <div class="columns is-centered mt-2">
+                  <div class="column is-1"><a class="level-item" aria-label="like" href="' . STARTING_URL . '/user/ulubione?liked=' . $recipe->id . '">
+                      <span class="icon is-small">
+                          <i class="fas fa-heart" aria-hidden="true"></i>
+                      </span>
+                  </a></div>
+                  <div class="column is-4"><form action="' . STARTING_URL . '/user/przepis?id=' . $recipe->id . '" method="post"><input class="button is-small" type="submit" value="Zobacz przepis"></form></div>
+                </div>
 
 
-
-
+                </div>
+                </div>
+                </div>
+                </div>
                       ';
-//-------------------------
-//OLD ->
-//-------------------------
-                echo '
-                        <li class="item lres" data-tags="' . $recipe->tag . '">
-                        <div class="box">
-                            <article class="media">
-                                <div class="media-left">
-                                        <img src="/iQchnia/public/' . $recipe->photo . '" alt="Image">
-                                </div>
-                                <div class="media-content">
-                                            <strong>' . $recipe->name . '</strong> <small>@' . $recipe->login . '</small> <small></small>
-                                            <br>
-                                            <strong">' . $recipe->title . '</strong>
-                                            <br>
+                      $cnt+=1;
 
 
 
-                                            <p class="overflow-ellipsis">' . $recipe->description . '</p>
-
-                                            <br>
+                    } ?>
 
 
-                                            <div class="content2">
-                                                <a class="level-item" aria-label="like" href="' . STARTING_URL . '/user/ulubione?liked=' . $recipe->id . '">
-                                                    <span class="icon is-small">
-                                                        <i class="fas fa-heart" aria-hidden="true"></i>
-                                                    </span>
-                                                </a>
-
-                                            <form action="' . STARTING_URL . '/user/przepis?id=' . $recipe->id . '" method="post"><input class="button is-small" type="submit" value="Zobacz przepis"></form>
-                                        </div>
-                                    </div>
-
-                            </article>
-                        </div>
-                    </li>
-
-
-
-
-                        ';
-            }
-            ?>
-
-        </ul>
-        <div class="container is-max-desktop ">
-        <nav class="pagination is-rounded my-3" role="navigation" aria-label="pagination">
-          <a class="pagination-previous ">Poprzednia</a>
-          <a class="pagination-next ">Następna</a>
-          <ul class="pagination-list ">
-            <li>
-              <a class="pagination-link " aria-label="Goto page 1">1</a>
-            </li>
-            <li>
-              <span class="pagination-ellipsis ">&hellip;</span>
-            </li>
-            <li>
-              <a class="pagination-link " aria-label="Goto page 45">45</a>
-            </li>
-            <li>
-              <a class="pagination-link is-dark" aria-label="Page 46" aria-current="page">46</a>
-            </li>
-            <li>
-              <a class="pagination-link " aria-label="Goto page 47">47</a>
-            </li>
-            <li>
-              <span class="pagination-ellipsis ">&hellip;</span>
-            </li>
-            <li>
-              <a class="pagination-link " aria-label="Goto page 86">86</a>
-            </li>
-          </ul>
-        </nav>
       </div>
-      </div>
-    </div>
+    </section>
 </div>
 
 <script>
-    const liElements = document.querySelectorAll('.lres');
+    const elements = document.querySelectorAll('.rec');
     const input = document.getElementById("ins");
     const ul = document.getElementById('res');
+
 
     const searchTask = (e) => {
         let searchText = e.target.value.toLowerCase();
         let searchTextArray = searchText.split(" ");
-        let recipes = [...liElements];
+        let recipes = [...elements];
         console.log(searchTextArray);
         searchTextArray.forEach(searchTextArrayItem =>
             recipes = recipes.filter(li => li.dataset.tags.toLocaleLowerCase().includes(searchTextArrayItem))
@@ -191,8 +142,26 @@
         console.log(recipes)
 
         ul.textContent = "";
-        recipes.forEach(li => ul.appendChild(li))
 
+        let div = document.createElement('div');
+        div.classList.add('columns');
+        div.classList.add('features');
+
+        ul.appendChild(div)
+
+        if (recipes.length <= 3)
+          recipes.forEach(li => div.appendChild(li))
+        else
+        {
+          div.display = "block"
+          recipes.forEach(li => div.appendChild(li))
+        }
+
+
+
+        if (recipes.length === 0)
+          ul.textContent = "Brak dostępnych przepisów";
     }
+
     input.addEventListener('input', searchTask)
 </script>
